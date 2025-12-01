@@ -1,0 +1,170 @@
+/* --- FONTS & RESETS --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Oswald:wght@500;700&display=swap');
+
+:root {
+  --footer-bg: #050505;       /* Deepest Black */
+  --footer-text: #ffffff;     /* Pure White */
+  --footer-border: #333333;   /* Subtle Border */
+  --brand-blue: #005CA9;
+  --brand-red: #E41E26;
+}
+
+.site-footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 80px 4% 0; /* Top padding, Side padding, NO bottom padding (for logo flush) */
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-wrapper {
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* --- TOP SECTION GRID --- */
+.footer-top-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Links take 2/3, Newsletter 1/3 */
+  gap: 80px;
+  margin-bottom: 100px; /* Space between links and giant logo */
+}
+
+/* --- NAVIGATION --- */
+.footer-nav {
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.nav-col h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666; /* Muted Header */
+  margin-bottom: 30px;
+}
+
+.nav-col a {
+  display: block;
+  text-decoration: none;
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-col a:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* --- NEWSLETTER --- */
+.footer-newsletter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.newsletter-box {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--footer-border);
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.newsletter-box h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  display: flex;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 8px;
+}
+
+.input-group input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.input-group button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.input-group button:hover {
+  transform: translateX(3px) scale(1.1);
+  color: var(--brand-red);
+}
+
+/* --- GIANT LOGO --- */
+.footer-giant-logo {
+  width: 100%;
+  line-height: 0;
+  border-top: 1px solid rgba(255,255,255,0.05); /* Very subtle separator */
+  padding-top: 20px;
+}
+
+.brand-svg {
+  width: 100%;
+  height: auto;
+  max-height: 25vw; /* Scales with viewport */
+  display: block;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .footer-top-content {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .footer-newsletter {
+    justify-content: flex-start;
+  }
+  
+  .newsletter-box {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-nav {
+    gap: 40px;
+    justify-content: space-between;
+  }
+  
+  .nav-col {
+    width: 45%;
+  }
+  
+  .footer-giant-logo {
+    margin-top: 40px;
+  }
+}
