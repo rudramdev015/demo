@@ -8,7 +8,7 @@ const Navbar = () => {
   // Handle Scroll Effect
   useEffect(() => {
     const handleScroll = () => {
-      // Threshold of 20px makes it react faster to scrolling
+      // Activates the glass background after scrolling 20px
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
@@ -22,14 +22,14 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top Announcement Bar - Slides up when scrolled */}
+      {/* Top Announcement Bar - Slides away on scroll */}
       <div className={`top-bar ${isScrolled ? "hidden" : ""}`}>
         <span>GET 15% OFF FOR BLACK FRIDAY WITH CODE: <strong>BLACKFRIDAY15</strong></span>
       </div>
 
       <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
         
-        {/* --- 1. Hamburger (Mobile) --- */}
+        {/* --- 1. Mobile Menu Trigger --- */}
         <div className="mobile-menu-trigger" onClick={() => setMenuOpen(!menuOpen)}>
           <div className={`hamburger ${menuOpen ? "open" : ""}`}>
             <span></span>
@@ -45,14 +45,14 @@ const Navbar = () => {
           <a href="#discover" className="nav-link">Discover</a>
         </div>
 
-        {/* --- 3. CENTER LOGO --- */}
+        {/* --- 3. CENTER LOGO (ALWAYS BIG) --- */}
         <div className="nav-logo">
           <a href="#">
-            {/* Increased viewBox height to allow logo to grow without clipping */}
+            {/* SVG Logo with precise paths */}
             <svg viewBox="0 0 340 80" className="navbar-brand-svg" aria-label="DotGanga">
               <g style={{ fontFamily: "'Inter', sans-serif", fontWeight: "900" }}>
                 
-                {/* 'Dot' - Blue */}
+                {/* 'Dot' - Brand Blue */}
                 <text x="10" y="55" className="logo-text blue">Dot</text>
 
                 {/* The Red Arrow Icon */}
@@ -63,7 +63,7 @@ const Navbar = () => {
                    <path d="M18 8 L18 26 M18 8 L11 15 M18 8 L25 15" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </g>
 
-                {/* 'Ganga' - Red */}
+                {/* 'Ganga' - Brand Red */}
                 <text x="170" y="55" className="logo-text red">Ganga</text>
                 
               </g>
@@ -78,7 +78,7 @@ const Navbar = () => {
           <a href="#cart" className="nav-link">Cart (0)</a>
         </div>
 
-        {/* --- 5. Mobile Menu Overlay --- */}
+        {/* --- 5. Mobile Menu Drawer --- */}
         <div className={`mobile-menu-overlay ${menuOpen ? "active" : ""}`}>
           <div className="mobile-links-container">
             <a href="#shop" onClick={() => setMenuOpen(false)}>Shop Now</a>

@@ -1,20 +1,27 @@
-/* --- FONTS & VARS --- */
+/* --- FONTS & VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Oswald:wght@500;700&display=swap');
 
 :root {
-  --nav-height-large: 110px; /* Tall and spacious initially */
-  --nav-height-small: 60px;  /* Compact when scrolled */
-  --nav-height-hover: 120px; /* Even bigger when hovering! */
+  /* DIMENSIONS */
+  --nav-height-top: 110px;      /* Height at the very top */
+  --nav-height-scrolled: 90px;  /* Height when scrolled (Still BIG) */
   
+  /* LOGO SIZES */
+  --logo-size-top: 55px;
+  --logo-size-scrolled: 50px;   /* Barely shrinks, stays BIG */
+
+  /* COLORS */
   --brand-blue: #005CA9;
   --brand-red: #E41E26;
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --glass-blur: blur(15px);
-  --text-dark: #111;
+  --text-dark: #111111;
   
-  /* Premium Easing: Makes animation feel expensive */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1); 
-  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  /* PREMIUM GLASS EFFECT */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(20px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  /* ANIMATIONS */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); /* Smooth Apple-like easing */
 }
 
 /* --- TOP ANNOUNCEMENT BAR --- */
@@ -24,19 +31,19 @@
   text-align: center;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: margin-top 0.5s var(--ease-smooth);
+  transition: margin-top 0.5s var(--ease-premium);
   overflow: hidden;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .top-bar.hidden {
-  margin-top: -41px; 
+  margin-top: -41px; /* Slides up out of view */
 }
 
 /* --- NAVBAR CONTAINER --- */
@@ -45,35 +52,28 @@
   top: 40px;
   left: 0;
   width: 100%;
-  height: var(--nav-height-large);
+  height: var(--nav-height-top);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 4%;
   z-index: 1000;
-  background: transparent;
-  transition: all 0.6s var(--ease-smooth);
+  background: transparent; /* Transparent at top */
+  transition: all 0.6s var(--ease-premium);
 }
 
-/* --- SCROLLED STATE (Compact) --- */
+/* --- SCROLLED STATE (Premium Glass) --- */
 .navbar.scrolled {
   top: 0;
-  height: var(--nav-height-small);
-  background: var(--nav-bg);
-  backdrop-filter: var(--glass-blur);
+  height: var(--nav-height-scrolled); /* Stays Tall */
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur); /* The Blur Effect */
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03); /* Soft Premium Shadow */
 }
 
-/* --- HOVER EFFECT (The "Big Reveal") --- */
-.navbar.scrolled:hover {
-  height: var(--nav-height-hover);
-  background: #ffffff;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-}
-
-/* --- LOGO STYLING --- */
+/* --- LOGO STYLING (ALWAYS BIG) --- */
 .nav-logo {
   flex: 0 0 auto;
   display: flex;
@@ -82,24 +82,20 @@
 }
 
 .navbar-brand-svg {
-  height: 55px; /* Default large size */
+  height: var(--logo-size-top); /* Default Big Size */
   width: auto;
-  transition: height 0.6s var(--ease-spring);
+  transition: height 0.6s var(--ease-premium);
   display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
 }
 
 .logo-text.blue { fill: var(--brand-blue); }
 .logo-text.red { fill: var(--brand-red); }
 .logo-icon-circle { fill: var(--brand-red); }
 
-/* Logo: Scrolled (Tiny) */
+/* When Scrolled: Logo stays almost same size (Very subtle adjustment) */
 .navbar.scrolled .navbar-brand-svg {
-  height: 32px; 
-}
-
-/* Logo: Hover while Scrolled (MASSIVE) */
-.navbar.scrolled:hover .navbar-brand-svg {
-  height: 75px; /* Bigger than original! */
+  height: var(--logo-size-scrolled); 
 }
 
 /* --- LINKS STYLING --- */
@@ -107,16 +103,10 @@
   flex: 1;
   display: flex;
   align-items: center;
-  transition: opacity 0.3s;
 }
 
 .nav-group.left { justify-content: flex-start; }
 .nav-group.right { justify-content: flex-end; }
-
-/* Optional: Fade links slightly when scrolled to focus on logo */
-.navbar.scrolled:not(:hover) .nav-group {
-  opacity: 0.8;
-}
 
 .nav-link {
   color: var(--text-dark);
@@ -131,6 +121,7 @@
   transition: color 0.3s;
 }
 
+/* Premium Underline Animation */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -138,15 +129,15 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--brand-red); /* Red underline accent */
-  transition: width 0.3s var(--ease-spring);
+  background: var(--brand-blue);
+  transition: width 0.3s var(--ease-premium);
 }
 
 .nav-link:hover::after {
   width: 100%;
 }
 
-/* --- MOBILE MENU --- */
+/* --- MOBILE HAMBURGER --- */
 .mobile-menu-trigger {
   display: none;
   cursor: pointer;
@@ -165,17 +156,18 @@
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
-/* Mobile Overlay */
+/* --- MOBILE OVERLAY --- */
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #ffffff;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(10px);
   z-index: 999;
   transform: translateY(-100%);
-  transition: transform 0.6s var(--ease-smooth);
+  transition: transform 0.6s var(--ease-premium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,11 +208,11 @@
   
   .navbar { padding: 0 20px; }
   
-  /* Disable big hover effect on touch devices to prevent jumpiness */
-  .navbar.scrolled:hover {
-    height: var(--nav-height-small);
+  /* On mobile, standard height to save space */
+  .navbar.scrolled {
+    height: 70px;
   }
-  .navbar.scrolled:hover .navbar-brand-svg {
-    height: 32px;
+  .navbar.scrolled .navbar-brand-svg {
+    height: 40px; /* Slightly smaller on mobile scroll for usability */
   }
 }
